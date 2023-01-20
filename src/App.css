@@ -313,6 +313,7 @@
   color: #2e3136;
   font-family: 'Poppins';
   margin: 10px;
+  font-weight: 575;
 }
 
 .text {
@@ -341,8 +342,15 @@
   font-family: 'Poppins', sans-serif;
 }
 
-.timeStamp{
-  color:#798BA3;
-  font-size:16px;
-  font-family: "Poppins";
+.timeStamp {
+  color: #798ba3;
+  font-size: 16px;
+  font-family: 'Poppins';
+}
+
+.btn-border {
+  border: 2px solid #ecf0f4;
+}
+.btn-border:hover {
+  background-color: #ecf0f4;
 }

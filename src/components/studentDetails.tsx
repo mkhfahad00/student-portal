@@ -15,6 +15,7 @@ const StudentDetails = () => {
         <Col> Date </Col>
         <Col> Action </Col>
       </Row>
+      <hr style={{borderColor:"gray"}}/>
       <SingleRecord/>
       <SingleRecord/>
       <SingleRecord/>

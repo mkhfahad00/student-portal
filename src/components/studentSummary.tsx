@@ -11,7 +11,7 @@ function StudentSummary() {
         </div>
         <div className="ml-auto">
           <button
-            className="btn btn-outline-light text-dark"
+            className="btn btn-border"
             style={{ float: 'right', marginRight:"200px" }}
           >
             + Add Data
