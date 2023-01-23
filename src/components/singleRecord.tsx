@@ -1,7 +1,7 @@
 import React from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import DropdownMenu from './dropdownMenu'
+import DropdownMenu from 'components/dropdownMenu'
 function SingleRecord() {
   return (
     <>

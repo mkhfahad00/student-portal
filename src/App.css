@@ -242,6 +242,7 @@
 .summaryBox {
   width: 146px;
   height: 99px;
+  font-family: "Poppins";
   /* background: url("../images/v1_379.png"); */
   background-repeat: no-repeat;
   background-position: center center;
@@ -272,7 +273,7 @@
   position: absolute;
   top: 13px;
   left: 27px;
-  font-family: Poppins;
+  font-family: 'Poppins';
   font-weight: Medium;
   font-size: 16px;
   opacity: 1;
@@ -284,7 +285,7 @@
   position: absolute;
   top: 49px;
   left: 52px;
-  font-family: Poppins;
+  font-family: 'Poppins';
   font-weight: Medium;
   font-size: 24px;
   opacity: 1;

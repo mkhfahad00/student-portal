@@ -1,5 +1,5 @@
 import { Modal, Button } from 'react-bootstrap'
-import React from 'react'
+// import React from 'react'
 import { useState } from 'react'
 
 function InputModal() {

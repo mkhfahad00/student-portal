@@ -1,6 +1,6 @@
-import React from 'react'
+// import React from 'react'
 import { Row, Col, Container, Stack } from 'react-bootstrap'
-import SummaryBox from './summaryBox'
+import SummaryBox from 'components/summaryBox'
 
 function StudentSummary() {
   return (

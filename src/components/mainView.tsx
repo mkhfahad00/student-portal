@@ -1,8 +1,8 @@
-import React from 'react'
-import { useState } from 'react'
-import InputModal from './inputModal'
-import StudentDetails from './studentDetails'
-import StudentSummary from './studentSummary'
+// import React from 'react'
+// import { useState } from 'react'
+import InputModal from 'components/inputModal'
+import StudentDetails from 'components/studentDetails'
+import StudentSummary from 'components/studentSummary'
 
 function MainView() {
     // const [show, setShow] = useState(false)

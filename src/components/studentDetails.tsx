@@ -1,6 +1,6 @@
 import React from 'react'
 import Container from 'react-bootstrap/Container'
-import SingleRecord from './singleRecord'
+import SingleRecord from 'components/singleRecord'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
