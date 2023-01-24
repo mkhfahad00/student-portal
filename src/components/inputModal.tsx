@@ -7,7 +7,7 @@ import * as yup from "yup";
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
   subject: yup.string().required("Subject is required"),
-  marks: yup.number().positive().integer().required("Marks are required"),
+  marks: yup.number().positive().integer().min(0).required("Marks are required"),
   grades: yup.string().required("Grades are required"),
 });
 
@@ -92,7 +92,13 @@ const InputModal: React.FC<ModalProps> = (props) => {
                 {...register("marks")}
               />
               {errors.marks && (
-                <Form.Text className="text-danger">{errors.marks.toString()} </Form.Text>
+                <Form.Text className="text-danger">
+                  {errors?.marks?.message?.includes(
+                    "marks must be a `number` type"
+                  )
+                    ? "Must enter marks"
+                    : errors?.marks?.message?.toString()}{" "}
+                </Form.Text>
               )}
             </Form.Group>
 
