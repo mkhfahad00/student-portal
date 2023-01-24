@@ -82,14 +82,14 @@
 }
 
 #menu-wrap .dots > div:after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: calc((25px / 2) - (6px / 2));
   left: 0;
 }
 
 #menu-wrap .dots > div:before {
-  content: '';
+  content: "";
   position: absolute;
   top: calc((25px / 2) - (6px / 2));
   left: 0;
@@ -242,7 +242,7 @@
 .summaryBox {
   width: 146px;
   height: 99px;
-  font-family: "Poppins";
+  font-family: "Roboto";
   /* background: url("../images/v1_379.png"); */
   background-repeat: no-repeat;
   background-position: center center;
@@ -273,7 +273,7 @@
   position: absolute;
   top: 13px;
   left: 27px;
-  font-family: 'Poppins';
+  font-family: "Roboto";
   font-weight: Medium;
   font-size: 16px;
   opacity: 1;
@@ -285,7 +285,7 @@
   position: absolute;
   top: 49px;
   left: 52px;
-  font-family: 'Poppins';
+  font-family: "Roboto";
   font-weight: Medium;
   font-size: 24px;
   opacity: 1;
@@ -304,7 +304,7 @@
 .mainHdg {
   font-size: 24px;
   color: black;
-  font-family: 'Poppins';
+  font-family: "Roboto";
   margin: 20px;
   font-weight: bolder;
 }
@@ -312,7 +312,7 @@
 .subHdg {
   font-size: 18px;
   color: #2e3136;
-  font-family: 'Poppins';
+  font-family: "Roboto";
   margin: 10px;
   font-weight: 575;
 }
@@ -320,7 +320,7 @@
 .text {
   font-size: 16px;
   color: #343744;
-  font-family: 'Poppins';
+  font-family: "Roboto";
   font-weight: bolder;
 }
 
@@ -340,13 +340,13 @@
   font-size: 16px;
   letter-spacing: 0%;
   text-align: left;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .timeStamp {
   color: #798ba3;
   font-size: 16px;
-  font-family: 'Poppins';
+  font-family: "Roboto";
 }
 
 .btn-border {
@@ -354,4 +354,21 @@
 }
 .btn-border:hover {
   background-color: #ecf0f4;
+}
+
+.inputForm-btnGroup {
+  display: flex;
+  justify-content: space-between;
+  padding-top:15px
+}
+
+.btn-InputModalSuccess{
+  background-color: #4aaa9a;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+.btn-InputModalCancel{
+  background-color: #4aaa9a;
+  padding-left: 60px;
+  padding-right: 60px;
 }

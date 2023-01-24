@@ -31,7 +31,7 @@ function MainView() {
       </Stack>
       <StudentSummary />
       <StudentDetails />
-      <InputModal visible={show}  setVisible={setShow}/>
+      <InputModal isEdit={false} visible={show}  setVisible={setShow}/>
     </>
   );
 }
