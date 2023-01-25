@@ -1,5 +1,5 @@
 import React from 'react'
-
+import 'styles/dropdownMenu.css'
 function DropdownMenu() {
   return (
     <div id="menu-wrap">
@@ -12,12 +12,12 @@ function DropdownMenu() {
           <ul>
             <li>
               <p className="link">
-                Option one
+                Edit
               </p>
             </li>
             <li>
               <p className="link">
-                Option two
+                Delete
               </p>
             </li>
           </ul>
