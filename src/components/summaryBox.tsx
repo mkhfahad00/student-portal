@@ -1,16 +1,20 @@
-import React from 'react'
+import React from "react";
 
-function SummaryBox() {
+interface ISummaryBoxProps {
+  color: string;
+  text: string;
+  subText: string;
+}
+const SummaryBox: React.FC<ISummaryBoxProps> = (props) => {
   return (
     <>
-    {/* <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet" /> */}
-    <div className="summaryBox">
-      <div className="summaryBoxInner"></div>
-      <span className="summaryBoxText">Top Grade</span>
-      <span className="summaryBoxSubtext">A+</span>
-    </div>
+      <div className="summaryBox">
+        <div className="summaryBoxInner" style={{background:props?.color}}></div>
+        <span className="summaryBoxText">{props?.text}</span>
+        <span className="summaryBoxSubtext">{props?.subText}</span>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default SummaryBox
+export default SummaryBox;
