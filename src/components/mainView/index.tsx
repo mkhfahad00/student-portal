@@ -1,10 +1,11 @@
 import StudentInputModal from "components/inputModal";
 import StudentDetails from "components/mainView/StudentDetails";
 import StudentSummary from "components/mainView/StudentSummary";
-import { useState } from "react";
-import { Stack } from "react-bootstrap";
+import { useEffect, useState } from "react";
 import React from "react";
 import "components/mainView/styles.css";
+import { IStudentState, IDispatchToProps } from "state/ducks/students/types";
+import Header from "components/header";
 
 type AllProps = IStudentState & IDispatchToProps;
 

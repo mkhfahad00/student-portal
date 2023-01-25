@@ -6,9 +6,9 @@ import {
 	PayloadAction,
 	TypeConstant
 } from "typesafe-actions";
-import { studentReducer } from "./students/reducers";
-import postSaga from "./students/sagas";
-import { IStudentState } from "./students/types";
+import { studentReducer } from "state/ducks/students/reducers";
+import postSaga from "state/ducks/students/sagas";
+import { IStudentState } from "state/ducks/students/types";
 // The top-level state object
 export interface IApplicationState {
 	students: IStudentState;
