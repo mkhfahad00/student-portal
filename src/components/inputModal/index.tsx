@@ -2,17 +2,16 @@ import { Modal, Form } from "react-bootstrap";
 import React, { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import FormButtonGroup from "components/inputModal/FormButton";
+import FormButtonGroup from "components/inputModal/FormAction";
 import { schema } from "utils/inputFormSchema";
-import { ModalType } from "utils/enums";
-// import InputFormSelect from "components/inputModal/inputSelect";
-import InputTextField from "components/inputModal/inputTextField";
-import InputSelectField from "./inputSelect";
-
+import { MODAL_TYPE } from "utils/enums";
+import InputTextField from "components/inputModal/InputTextField";
+import InputSelectField from "components/inputModal/InputSelect";
+import {grades, subjects} from "utils/index";
 interface IModalProps {
   visible: boolean;
   setVisible: Function;
-  isEdit: boolean;
+  // isEdit: boolean;
 }
 
 const StudentInputModal: React.FC<IModalProps> = (props) => {
@@ -23,9 +22,8 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
     grades: "",
   };
 
-  const grades = ["A", "B", "C", "D", "F"];
-  const subjects = ["English", "Math", "Science", "History"];
-  const modalType = props.isEdit ? ModalType.EDIT : ModalType.ADD;
+  // const modalType = props?.isEdit ? MODAL_TYPE.EDIT : MODAL_TYPE.ADD;
+  const modalType = MODAL_TYPE.ADD;
 
   const {
     register,

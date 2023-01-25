@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import 'styles/formButton.css'
+import 'components/inputModal/styles.css'
 interface IFormButtonProps {
   setVisible: Function;
 }
