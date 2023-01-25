@@ -1,10 +1,10 @@
-import StudentInputModal from "components/inputModal/inputModal";
-import StudentDetails from "components/studentDetails";
-import StudentSummary from "components/studentSummary";
+import StudentInputModal from "components/inputModal";
+import StudentDetails from "components/mainView/StudentDetails";
+import StudentSummary from "components/mainView/StudentSummary";
 import { useState } from "react";
 import { Stack } from "react-bootstrap";
 import React from "react";
-import 'styles/mainView.css'
+import 'components/mainView/styles.css'
 
 function MainView() {
   const [show, setShow] = useState(false)
@@ -32,7 +32,7 @@ function MainView() {
       </Stack>
       <StudentSummary />
       <StudentDetails />
-      <StudentInputModal isEdit={false} visible={show}  setVisible={setShow}/>
+      <StudentInputModal visible={show}  setVisible={setShow}/>
     </>
   );
 }

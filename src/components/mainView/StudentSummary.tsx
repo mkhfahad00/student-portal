@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Container, Stack } from "react-bootstrap";
-import SummaryBox from "components/summaryBox";
+import SummaryBox from "components/mainView/SummaryBox";
 
 function StudentSummary() {
   return (

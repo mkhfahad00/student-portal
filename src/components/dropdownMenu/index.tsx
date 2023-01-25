@@ -1,5 +1,5 @@
 import React from 'react'
-import 'styles/dropdownMenu.css'
+import 'components/dropdownMenu/styles.css'
 function DropdownMenu() {
   return (
     <div id="menu-wrap">
