@@ -4,13 +4,13 @@
     padding-top:15px
   }
   .btn-inputSuccess{
-    background-color: #4aaa9a;
-    padding-left: 60px;
-    padding-right: 60px;
+    background-color: #4aaa9a !important;
+    padding-left: 60px !important;
+    padding-right: 60px !important;
   }
   .btn-inputCancel{
-    background-color: white important;
-    padding-left: 60px;
-    padding-right: 60px;
-    color:black;
+    background-color: white !important;
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+    color:black !important;
   }
