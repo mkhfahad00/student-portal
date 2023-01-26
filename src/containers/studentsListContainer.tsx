@@ -17,7 +17,7 @@ const StudentsListContainer = () => {
   );
 
   const dispatchToProps = {
-    fetchPosts: useCallback(() => dispatch(fetchStudents()), [dispatch]),
+    fetchStudents: useCallback(() => dispatch(fetchStudents()), [dispatch]),
   };
 
   return <MainView {...stateToProps} {...dispatchToProps} />;

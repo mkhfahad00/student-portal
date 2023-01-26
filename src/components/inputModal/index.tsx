@@ -5,9 +5,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import FormButtonGroup from "components/inputModal/FormAction";
 import { schema } from "utils/inputFormSchema";
 import { MODAL_TYPE } from "utils/enums";
-import InputTextField from "components/inputModal/InputTextField";
-import InputSelectField from "components/inputModal/InputSelect";
-import {grades, subjects} from "utils/index";
+import InputTextField from "components/inputModal/inputTextField";
+import InputSelectField from "components/inputModal/inputSelect";
+import { grades, subjects } from "utils/index";
 interface IModalProps {
   visible: boolean;
   setVisible: Function;
@@ -26,7 +26,6 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
   const modalType = MODAL_TYPE.ADD;
 
   const {
-    register,
     handleSubmit,
     reset,
     control,

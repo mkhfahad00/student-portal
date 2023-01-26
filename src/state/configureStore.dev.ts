@@ -3,12 +3,12 @@ import { IApplicationState, rootReducer, rootSaga } from "./ducks/index";
 import sagaMiddleware from "state/middleware/saga";
 
 export default function configureStore(
-	initialState: IApplicationState
+  initialState: IApplicationState
 ): Store<IApplicationState> {
-	const middlewares = applyMiddleware(sagaMiddleware); // Create Store
-	const store = createStore(rootReducer, initialState, middlewares);
+  const middlewares = applyMiddleware(sagaMiddleware); // Create Store
+  const store = createStore(rootReducer, initialState, middlewares);
 
-	sagaMiddleware.run(rootSaga);
+  sagaMiddleware.run(rootSaga);
 
-	return store;
+  return store;
 }
