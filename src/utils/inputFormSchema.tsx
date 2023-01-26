@@ -10,5 +10,5 @@ export const schema = yup.object().shape({
     .integer()
     .min(0, "Invalid Value")
     .required("Marks are required"),
-  grades: yup.string().required("Grades are required"),
+  grades: yup.string().required("Grade is required"),
 });

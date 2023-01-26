@@ -27,6 +27,18 @@ export const studentReducer = (
         ...state,
       };
     }
+    case StudentActionTypes.ADD_STUDENT: {
+      return { ...state, loading: true };
+    }
+    case StudentActionTypes.ADD_STUDENT_SUCCESS: {
+      const temp = [...state.data, ...action?.payload];
+      return { ...initialState, data: temp };
+    }
+    case StudentActionTypes.ADD_STUDENT_ERROR: {
+      return {
+        ...state,
+      };
+    }
     default:
       return state;
   }

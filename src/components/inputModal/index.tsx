@@ -1,5 +1,5 @@
 import { Modal, Form } from "react-bootstrap";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormButtonGroup from "components/inputModal/FormAction";
@@ -8,20 +8,25 @@ import { MODAL_TYPE } from "utils/enums";
 import InputTextField from "components/inputModal/inputTextField";
 import InputSelectField from "components/inputModal/inputSelect";
 import { grades, subjects } from "utils/index";
+import { IStudentRaw } from "state/ducks/students/types";
+import { ActionType } from "typesafe-actions";
+import { addStudent } from "state/ducks/students/actions";
 interface IModalProps {
   visible: boolean;
   setVisible: Function;
-  // isEdit: boolean;
+  addStudent: (payload: IStudentRaw) => ActionType<typeof addStudent>;
 }
 
 const StudentInputModal: React.FC<IModalProps> = (props) => {
   const initState = {
     name: "",
     subject: "",
-    marks: "",
-    grades: "",
+    marks: 0,
+    grade: "",
   };
 
+  const [payload, setPayload] = useState<object>(initState);
+  console.log("payload", payload);
   // const modalType = props?.isEdit ? MODAL_TYPE.EDIT : MODAL_TYPE.ADD;
   const modalType = MODAL_TYPE.ADD;
 
@@ -41,12 +46,14 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
     if (isSubmitSuccessful) {
       reset();
       console.log("Reset form!");
+      // addStudent(payload);
     }
   }, [isSubmitSuccessful, reset, props.visible]);
 
   const onSubmit = (values: object) => {
     console.log("Values:::", values);
     props.setVisible(false);
+    setPayload(values);
   };
 
   return (
@@ -107,7 +114,7 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
 
             <Controller
               control={control}
-              name="grades"
+              name="grade"
               render={({ field }) => (
                 <InputSelectField
                   {...field}

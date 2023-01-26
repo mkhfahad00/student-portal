@@ -4,13 +4,14 @@ import StudentSummary from "components/mainView/StudentSummary";
 import { useEffect, useState } from "react";
 import React from "react";
 import "components/mainView/styles.css";
-import { IStudentState } from "state/ducks/students/types";
+import { IStudentRaw, IStudentState } from "state/ducks/students/types";
 import Header from "components/mainView/header";
 import { ActionType } from "typesafe-actions";
-import { fetchStudents } from "state/ducks/students/actions";
+import { addStudent, fetchStudents } from "state/ducks/students/actions";
 
 interface IProps extends IStudentState {
   fetchStudents: () => ActionType<typeof fetchStudents>;
+  addStudent: (payload: IStudentRaw) => ActionType<typeof addStudent>;
 }
 
 const MainView: React.FC<IProps> = ({ data, fetchStudents }) => {
@@ -27,7 +28,11 @@ const MainView: React.FC<IProps> = ({ data, fetchStudents }) => {
       <Header setShow={setShow} />
       <StudentSummary />
       <StudentDetails data={data} />
-      <StudentInputModal visible={show} setVisible={setShow} />
+      <StudentInputModal
+        visible={show}
+        setVisible={setShow}
+        addStudent={addStudent}
+      />
     </>
   );
 };
