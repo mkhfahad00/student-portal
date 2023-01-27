@@ -1,2 +1,2 @@
-import configureStore from "state/configureStore.dev";
-export default configureStore;
+import configureAppStore from "state/configureStore.dev";
+export default configureAppStore;

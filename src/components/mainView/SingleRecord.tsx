@@ -6,9 +6,15 @@ import { IStudentRaw } from "state/ducks/students/types";
 
 type SingleRecordProps = {
   student: IStudentRaw;
+  handleEdit: Function;
+  handleDelete: Function;
 };
 
-const SingleRecord = ({ student }: SingleRecordProps) => {
+const SingleRecord = ({
+  student,
+  handleEdit,
+  handleDelete,
+}: SingleRecordProps) => {
   return (
     <>
       <Row style={{ marginTop: "20px" }}>
@@ -26,7 +32,7 @@ const SingleRecord = ({ student }: SingleRecordProps) => {
         </Col>
         <Col>
           {" "}
-          <DropdownMenu />{" "}
+          <DropdownMenu handleEdit={handleEdit} handleDelete={handleDelete} />
         </Col>
       </Row>
       <hr style={{ borderColor: "gray" }} />

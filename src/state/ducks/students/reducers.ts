@@ -13,16 +13,18 @@ export const initialState: IStudentState = {
 
 export const studentReducer = (
   state: IStudentState = initialState,
-  action: Action<TypeConstant> & PayloadAction<TypeConstant, IStudentRaw[]>
+  action: Action<TypeConstant> &
+    PayloadAction<TypeConstant, IStudentRaw | IStudentRaw[] | string>
 ): IStudentState => {
   switch (action.type) {
     case StudentActionTypes.FETCH_STUDENTS: {
       return { ...state, loading: true };
     }
     case StudentActionTypes.FETCH_STUDENTS_SUCCESS: {
-      return { ...initialState, data: action.payload };
+      return { ...initialState, data: action.payload as IStudentRaw[] };
     }
     case StudentActionTypes.FETCH_STUDENTS_ERROR: {
+      console.log("ERROR", action.payload);
       return {
         ...state,
       };
@@ -31,10 +33,41 @@ export const studentReducer = (
       return { ...state, loading: true };
     }
     case StudentActionTypes.ADD_STUDENT_SUCCESS: {
-      const temp = [...state.data, ...action?.payload];
+      const temp = [...state.data];
+      temp.push(action.payload as IStudentRaw);
       return { ...initialState, data: temp };
     }
     case StudentActionTypes.ADD_STUDENT_ERROR: {
+      console.log("ERROR", action.payload);
+      return {
+        ...state,
+      };
+    }
+    case StudentActionTypes.UPDATE_STUDENT: {
+      return { ...state, loading: true };
+    }
+    case StudentActionTypes.UPDATE_STUDENT_SUCCESS: {
+      return { ...state, loading: false };
+    }
+    case StudentActionTypes.UPDATE_STUDENT_ERROR: {
+      console.log("ERROR", action.payload);
+      return {
+        ...state,
+      };
+    }
+    case StudentActionTypes.DELETE_STUDENT: {
+      return { ...state, loading: true };
+    }
+    case StudentActionTypes.DELETE_STUDENT_SUCCESS: {
+      return {
+        ...state,
+        data: state.data.filter((itx) => itx._id !== action.payload),
+        loading: false,
+      };
+    }
+
+    case StudentActionTypes.DELETE_STUDENT_ERROR: {
+      console.log("ERROR", action.payload);
       return {
         ...state,
       };

@@ -4,14 +4,24 @@ import SingleRecord from "components/mainView/SingleRecord";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { IStudentRaw } from "state/ducks/students/types";
+import { useSelector } from "react-redux";
+import { IApplicationState } from "state/ducks";
+import { deleteStudent } from "state/ducks/students/actions";
+import { ActionType } from "typesafe-actions";
 
-type StudentProps = {
-  data: IStudentRaw[];
+type IProps = {
+  setStudentData: Function;
+  setShow: Function;
+  handleDelete: Function;
 };
-
-const StudentDetails = ({ data }: StudentProps) => {
-  console.log("data in studentDetails", data);
-
+const StudentDetails = (props: IProps) => {
+  const studentList = useSelector(
+    (state: IApplicationState) => state?.students?.data
+  );
+  const handleEdit = (student: IStudentRaw) => {
+    props.setShow(true);
+    props.setStudentData(student);
+  };
   return (
     <Container>
       <>
@@ -24,8 +34,12 @@ const StudentDetails = ({ data }: StudentProps) => {
           <Col> Action </Col>
         </Row>
         <hr style={{ borderColor: "gray" }} />
-        {data?.map((student: IStudentRaw) => (
-          <SingleRecord student={student} />
+        {studentList?.map((student: IStudentRaw) => (
+          <SingleRecord
+            student={student}
+            handleEdit={() => handleEdit(student)}
+            handleDelete={() => props.handleDelete(student?._id)}
+          />
         ))}
       </>
     </Container>

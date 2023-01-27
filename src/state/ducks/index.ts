@@ -13,7 +13,6 @@ import { IStudentState } from "state/ducks/students/types";
 export interface IApplicationState {
   students: IStudentState;
 }
-// export interface IMetaAction extends MetaAction<TypeConstant, IMeta> {}
 export interface IReducerAction<TPayload>
   extends Action<TypeConstant>,
     PayloadAction<TypeConstant, TPayload> {}
@@ -23,7 +22,3 @@ export const rootReducer = combineReducers<IApplicationState>({
 export function* rootSaga() {
   yield all([fork(postSaga)]);
 }
-// interface IMeta {
-//   method: string;
-//   route: string;
-// }

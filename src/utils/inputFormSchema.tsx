@@ -9,6 +9,7 @@ export const schema = yup.object().shape({
     .positive()
     .integer()
     .min(0, "Invalid Value")
+    .max(100, "Maximum attainable marks are 100")
     .required("Marks are required"),
-  grades: yup.string().required("Grade is required"),
+  grade: yup.string().required("Grade is required"),
 });
