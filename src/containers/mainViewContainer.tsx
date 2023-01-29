@@ -10,7 +10,7 @@ import {
 } from "state/ducks/students/actions";
 import { IStudentRaw, IStudentState } from "state/ducks/students/types";
 
-const StudentsListContainer = () => {
+const MainViewContainer = () => {
   const dispatch = useDispatch();
 
   const stateToProps: IStudentState = useSelector(
@@ -40,4 +40,4 @@ const StudentsListContainer = () => {
   return <MainView {...stateToProps} {...dispatchToProps} />;
 };
 
-export default StudentsListContainer;
+export default MainViewContainer;

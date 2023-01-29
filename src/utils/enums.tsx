@@ -1,4 +1,4 @@
-export const enum MODAL_TYPE{
-    ADD="Add",
-    EDIT="Edit"
+export const enum MODAL_TYPE {
+  ADD = "Add",
+  EDIT = "Edit",
 }

@@ -22,13 +22,13 @@ const SingleRecord = ({
         <Col> {student?.marks} </Col>
         <Col> {student?.subject} </Col>
         <Col>
-          <div className="gradeBox" style={{ color: "#ffb59d" }}>
+          <div className={`gradeBox grade${student.grade}`}>
             {student?.grade}
           </div>
         </Col>
         <Col>
-          <div> Jan 29, 2022 </div>
-          <div className="timeStamp"> at 8:00 PM</div>
+          <div> {student?.date} </div>
+          <div className="timeStamp"> at {student?.time}</div>
         </Col>
         <Col>
           {" "}

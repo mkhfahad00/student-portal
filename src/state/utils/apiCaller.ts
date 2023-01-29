@@ -1,4 +1,4 @@
-const BASE_URL = "https://crudcrud.com/api/01a46669019b443b93672f5cbae32185"; //can move to .env
+const BASE_URL = "https://crudcrud.com/api/9a06185f6ecf4155bdd1b08e282110fd"; //can move to .env
 export default function apiCaller<T>(
   method: string,
   path: string,

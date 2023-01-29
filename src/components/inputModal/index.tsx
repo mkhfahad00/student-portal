@@ -52,10 +52,26 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
 
   const onSubmit = (values: IStudentRaw) => {
     reset(blankForm);
+    const date = new Date();
+    const formattedDate = date.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+    const formattedTime = date.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
     if (modalType === MODAL_TYPE.EDIT) {
-      props.updateStudent({ ...values, _id: props?.studentData._id });
+      props.updateStudent({
+        ...values,
+        _id: props?.studentData._id,
+        date: formattedDate,
+        time: formattedTime,
+      });
     } else {
-      props.addStudent(values);
+      props.addStudent({ ...values, date: formattedDate, time: formattedTime });
     }
     props.setStudentData({});
     props.setVisible(false);
