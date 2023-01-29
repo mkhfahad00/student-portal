@@ -6,8 +6,8 @@ import { IStudentRaw } from "state/ducks/students/types";
 
 type SingleRecordProps = {
   student: IStudentRaw;
-  handleEdit: Function;
-  handleDelete: Function;
+  handleEdit: () => void;
+  handleDelete: () => void;
 };
 
 const SingleRecord = ({

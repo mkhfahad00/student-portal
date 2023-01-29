@@ -6,13 +6,11 @@ import Col from "react-bootstrap/Col";
 import { IStudentRaw } from "state/ducks/students/types";
 import { useSelector } from "react-redux";
 import { IApplicationState } from "state/ducks";
-import { deleteStudent } from "state/ducks/students/actions";
-import { ActionType } from "typesafe-actions";
 
 type IProps = {
-  setStudentData: Function;
-  setShow: Function;
-  handleDelete: Function;
+  setStudentData: (std: IStudentRaw) => void;
+  setShow: (x: boolean) => void;
+  handleDelete: (x: string) => void;
 };
 const StudentDetails = (props: IProps) => {
   const studentList = useSelector(
@@ -34,9 +32,10 @@ const StudentDetails = (props: IProps) => {
           <Col> Action </Col>
         </Row>
         <hr style={{ borderColor: "gray" }} />
-        {studentList?.map((student: IStudentRaw) => (
+        {studentList?.map((student: IStudentRaw, key) => (
           <SingleRecord
             student={student}
+            key={key}
             handleEdit={() => handleEdit(student)}
             handleDelete={() => props.handleDelete(student?._id)}
           />

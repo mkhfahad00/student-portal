@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Modal, Form } from "react-bootstrap";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormButtonGroup from "components/inputModal/FormAction";
@@ -11,88 +11,60 @@ import InputSelectField from "components/inputModal/inputSelect";
 import { grades, subjects } from "utils/index";
 import { IStudentRaw } from "state/ducks/students/types";
 import { ActionType } from "typesafe-actions";
-import {
-  addStudent,
-  fetchStudents,
-  updateStudent,
-} from "state/ducks/students/actions";
+import { addStudent, updateStudent } from "state/ducks/students/actions";
 interface IModalProps {
   visible: boolean;
-  setVisible: Function;
-  fetchStudents: () => ActionType<typeof fetchStudents>;
+  setVisible: (x: boolean) => void;
   addStudent: (payload: IStudentRaw) => ActionType<typeof addStudent>;
   updateStudent: (payload: IStudentRaw) => ActionType<typeof updateStudent>;
   studentData: IStudentRaw;
-  setStudentData: Function;
+  // setStudentData: () => void; //TODO
+  setStudentData: Function; //TODO
 }
 
 const StudentInputModal: React.FC<IModalProps> = (props) => {
-  const initState = props.studentData
-    ? { ...props.studentData }
-    : {
-        name: "",
-        marks: 0,
-        subject: "",
-        grade: "",
-      };
-
-  const [payload, setPayload] = useState<IStudentRaw>({
+  const blankForm = {
     name: "",
     marks: 0,
     subject: "",
     grade: "",
-  });
+  };
+
   const modalType = props?.studentData?._id ? MODAL_TYPE.EDIT : MODAL_TYPE.ADD;
 
   const {
     handleSubmit,
     reset,
     control,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = useForm<IStudentRaw>({
     mode: "onTouched",
     reValidateMode: "onChange",
     resolver: yupResolver(schema),
+    defaultValues: useMemo(() => {
+      return props.studentData || blankForm;
+    }, [props.studentData]),
   });
 
   useEffect(() => {
-    if (modalType === "Add")
-      reset({
-        name: "",
-        marks: 0,
-        subject: "",
-        grade: "",
-      });
-  }, [modalType]);
-
-  useEffect(() => {
-    if (modalType === "Edit") {
-      reset(props.studentData);
-    }
+    reset(props.studentData);
   }, [props.studentData]);
 
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      reset(initState);
-      if (modalType === "Edit") {
-        props.updateStudent({ ...payload, _id: props?.studentData._id });
-        props.fetchStudents();
-      } else {
-        props.addStudent(payload);
-      }
-      props.setStudentData();
-    }
-  }, [isSubmitSuccessful]);
-
   const onSubmit = (values: IStudentRaw) => {
+    reset(blankForm);
+    if (modalType === MODAL_TYPE.EDIT) {
+      props.updateStudent({ ...values, _id: props?.studentData._id });
+    } else {
+      props.addStudent(values);
+    }
+    props.setStudentData({});
     props.setVisible(false);
-    setPayload(values);
   };
 
   const handleClose = () => {
     props.setVisible(false);
-    props.setStudentData();
-    reset();
+    props.setStudentData({});
+    reset(blankForm);
   };
 
   return (

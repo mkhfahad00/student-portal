@@ -2,7 +2,7 @@ import React from "react";
 import { Stack } from "react-bootstrap";
 
 interface IHeaderProps {
-  setShow: Function;
+  setShow: (x: boolean) => void;
 }
 const Header: React.FC<IHeaderProps> = (props) => {
   return (

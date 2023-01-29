@@ -50,7 +50,6 @@ const MainView: React.FC<IProps> = ({
         setVisible={setShow}
         studentData={studentData as IStudentRaw}
         updateStudent={updateStudent}
-        fetchStudents={fetchStudents}
         addStudent={addStudent}
         setStudentData={setStudentData}
       />

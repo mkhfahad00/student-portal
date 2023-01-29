@@ -1,9 +1,10 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import "components/inputModal/styles.css";
+import { MODAL_TYPE } from "utils/enums";
 interface IFormButtonProps {
-  handleClose: Function;
-  mode: string;
+  handleClose: () => void;
+  mode: MODAL_TYPE;
 }
 
 const FormButtonGroup: React.FC<IFormButtonProps> = (props) => {

@@ -44,10 +44,25 @@ export const studentReducer = (
       };
     }
     case StudentActionTypes.UPDATE_STUDENT: {
-      return { ...state, loading: true };
+      return {
+        ...state,
+        loading: true,
+      };
     }
     case StudentActionTypes.UPDATE_STUDENT_SUCCESS: {
-      return { ...state, loading: false };
+      const temp = [...state.data];
+      const std = action.payload as IStudentRaw;
+      temp.splice(
+        temp.findIndex((itx) => itx._id === std._id),
+        1,
+        action.payload as IStudentRaw
+      );
+
+      return {
+        ...state,
+        loading: false,
+        data: temp,
+      };
     }
     case StudentActionTypes.UPDATE_STUDENT_ERROR: {
       console.log("ERROR", action.payload);

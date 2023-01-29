@@ -7,7 +7,7 @@ import {
   TypeConstant,
 } from "typesafe-actions";
 import { studentReducer } from "state/ducks/students/reducers";
-import postSaga from "state/ducks/students/sagas";
+import studentSaga from "state/ducks/students/sagas";
 import { IStudentState } from "state/ducks/students/types";
 // The top-level state object
 export interface IApplicationState {
@@ -20,5 +20,5 @@ export const rootReducer = combineReducers<IApplicationState>({
   students: studentReducer,
 });
 export function* rootSaga() {
-  yield all([fork(postSaga)]);
+  yield all([fork(studentSaga)]);
 }

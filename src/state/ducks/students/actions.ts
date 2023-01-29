@@ -24,15 +24,13 @@ export const addStudentError = (message: string) =>
   action(StudentActionTypes.ADD_STUDENT_ERROR, message);
 
 export const updateStudent = (data: IStudentRaw) => {
-  const payload = { ...data };
-  delete payload._id;
-  return action(StudentActionTypes.UPDATE_STUDENT, payload, {
+  return action(StudentActionTypes.UPDATE_STUDENT, data, {
     method: "put",
     route: `/students/${data?._id}`,
   });
 };
-export const updateStudentSuccess = (message: string) =>
-  action(StudentActionTypes.UPDATE_STUDENT_SUCCESS, message);
+export const updateStudentSuccess = (data: IStudentRaw) =>
+  action(StudentActionTypes.UPDATE_STUDENT_SUCCESS, data);
 export const updateStudentError = (message: string) =>
   action(StudentActionTypes.UPDATE_STUDENT_ERROR, message);
 

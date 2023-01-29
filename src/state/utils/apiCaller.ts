@@ -1,4 +1,4 @@
-const BASE_URL = "https://crudcrud.com/api/f28eb06e260c4e359bbaa59664cb4a1c"; //can move to .env
+const BASE_URL = "https://crudcrud.com/api/01a46669019b443b93672f5cbae32185"; //can move to .env
 export default function apiCaller<T>(
   method: string,
   path: string,
@@ -11,5 +11,7 @@ export default function apiCaller<T>(
       "Content-Type": "application/json",
     },
     body: data ? JSON.stringify(data) : null,
-  }).then((res) => res.json());
+  }).then((res) => {
+    return res?.json(); //TODO FIX ERROR HERE
+  });
 }
