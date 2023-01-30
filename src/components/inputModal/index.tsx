@@ -1,53 +1,85 @@
-import { Modal, Form } from "react-bootstrap";
-import React, { useEffect } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
+import { Modal, Form } from "react-bootstrap";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormButtonGroup from "components/inputModal/FormAction";
 import { schema } from "utils/inputFormSchema";
 import { MODAL_TYPE } from "utils/enums";
-import InputTextField from "components/inputModal/InputTextField";
-import InputSelectField from "components/inputModal/InputSelect";
-import {grades, subjects} from "utils/index";
+import InputTextField from "components/inputModal/inputTextField";
+import InputSelectField from "components/inputModal/inputSelect";
+import { grades, subjects } from "utils/index";
+import { IStudentRaw } from "state/ducks/students/types";
+import { ActionType } from "typesafe-actions";
+import { addStudent, updateStudent } from "state/ducks/students/actions";
 interface IModalProps {
   visible: boolean;
-  setVisible: Function;
-  // isEdit: boolean;
+  setVisible: (x: boolean) => void;
+  addStudent: (payload: IStudentRaw) => ActionType<typeof addStudent>;
+  updateStudent: (payload: IStudentRaw) => ActionType<typeof updateStudent>;
+  studentData: IStudentRaw;
+  setStudentData: (std: IStudentRaw | null) => void;
 }
 
 const StudentInputModal: React.FC<IModalProps> = (props) => {
-  const initState = {
+  const blankForm = {
     name: "",
+    marks: 0,
     subject: "",
-    marks: "",
-    grades: "",
+    grade: "",
   };
 
-  // const modalType = props?.isEdit ? MODAL_TYPE.EDIT : MODAL_TYPE.ADD;
-  const modalType = MODAL_TYPE.ADD;
+  const modalType = props?.studentData?._id ? MODAL_TYPE.EDIT : MODAL_TYPE.ADD;
 
   const {
-    register,
     handleSubmit,
     reset,
     control,
-    formState: { errors, isSubmitSuccessful },
-  } = useForm({
+    formState: { errors },
+  } = useForm<IStudentRaw>({
     mode: "onTouched",
     reValidateMode: "onChange",
     resolver: yupResolver(schema),
-    defaultValues: initState,
+    defaultValues: useMemo(() => {
+      return props.studentData || blankForm;
+    }, [props.studentData]),
   });
 
   useEffect(() => {
-    if (isSubmitSuccessful) {
-      reset();
-      console.log("Reset form!");
-    }
-  }, [isSubmitSuccessful, reset, props.visible]);
+    reset(props.studentData);
+  }, [props.studentData]);
 
-  const onSubmit = (values: object) => {
-    console.log("Values:::", values);
+  const onSubmit = (values: IStudentRaw) => {
+    reset(blankForm);
+    const date = new Date();
+    const formattedDate = date.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+    const formattedTime = date.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+    if (modalType === MODAL_TYPE.EDIT) {
+      props.updateStudent({
+        ...values,
+        _id: props?.studentData._id,
+        date: formattedDate,
+        time: formattedTime,
+      });
+    } else {
+      props.addStudent({ ...values, date: formattedDate, time: formattedTime });
+    }
+    props.setStudentData(null);
     props.setVisible(false);
+  };
+
+  const handleClose = () => {
+    props.setVisible(false);
+    props.setStudentData(null);
+    reset(blankForm);
   };
 
   return (
@@ -55,8 +87,7 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
       <Modal
         show={props.visible}
         onHide={() => {
-          props.setVisible(false);
-          reset();
+          handleClose();
         }}
         keyboard={false}
       >
@@ -108,7 +139,7 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
 
             <Controller
               control={control}
-              name="grades"
+              name="grade"
               render={({ field }) => (
                 <InputSelectField
                   {...field}
@@ -118,10 +149,9 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
                 />
               )}
             />
-            <FormButtonGroup setVisible={props.setVisible} />
+            <FormButtonGroup mode={modalType} handleClose={handleClose} />
           </Form>
         </Modal.Body>
-        <Modal.Footer></Modal.Footer>
       </Modal>
     </>
   );

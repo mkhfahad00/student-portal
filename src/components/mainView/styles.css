@@ -1,53 +1,31 @@
-.summaryBox {
-  width: 146px;
-  height: 99px;
-  font-family: 'Poppins', ;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: relative;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-}
 .summaryBoxInner {
   width: 146px;
   height: 99px;
-  /* background: #4aaa9a; */
-  opacity: 1;
   position: relative;
-  top: 0px;
-  left: 0px;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
-  overflow: hidden;
 }
 .summaryBoxText {
-  width: 85px;
   color: rgba(255, 255, 255, 1);
   position: absolute;
   top: 13px;
-  left: 27px;
-  font-family: 'Poppins', ;
-  font-weight: Medium;
+  width: 100%;
+  font-weight: normal;
   font-size: 14px;
   opacity: 1;
-  text-align: left;
+  text-align: center;
 }
 .summaryBoxSubtext {
-  width: 34px;
+  width: 100%;
   color: rgba(255, 255, 255, 1);
   position: absolute;
   top: 49px;
-  left: 52px;
-  font-family: 'Poppins', ;
-  font-weight: Medium;
+  font-weight: bolder;
   font-size: 22px;
   opacity: 1;
-  text-align: left;
+  text-align: center;
 }
 
 .white-button {
@@ -59,18 +37,16 @@
   cursor: pointer;
 }
 
-.mainHdg {
+.main-heading {
   font-size: 24px;
   color: black;
-  font-family: 'Poppins', ;
   margin: 20px;
   font-weight: bolder;
 }
 
-.subHdg {
+.sub-heading {
   font-size: 18px;
   color: #2e3136;
-  font-family: 'Poppins', ;
   margin: 10px;
   font-weight: 575;
 }
@@ -78,7 +54,6 @@
 .text {
   font-size: 16px;
   color: #343744;
-  font-family: 'Poppins', ;
   font-weight: bolder;
 }
 
@@ -93,18 +68,37 @@
   padding-right: 42px;
   padding-bottom: 7px;
   padding-left: 42px;
-  background-color: rgba(255, 247, 245, 1);
-  color: #ffb59d;
+  /* background-color: #fff7f5; */
+  /* color: #ffb59d; */
   font-size: 16px;
   letter-spacing: 0%;
   text-align: left;
-  font-family: "Roboto", ;
+}
+.gradeA {
+  background-color: #4bab9a;
+  color: #ffffff;
 }
 
+.gradeB {
+  background-color: #5894bf;
+  color: #ffffff;
+}
+
+.gradeC {
+  background-color: #ffb59e;
+  color: #686563;
+}
+.gradeD {
+  background-color: #686563;
+  color: #ffb59d;
+}
+.gradeF {
+  background-color: rgba(255, 104, 151, 0.5);
+  color: #ff3e00;
+}
 .timeStamp {
   color: #798ba3;
   font-size: 16px;
-  font-family: 'Poppins', ;
 }
 .btn-border {
   border: 2px solid #ecf0f4;

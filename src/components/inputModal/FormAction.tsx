@@ -1,24 +1,20 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import 'components/inputModal/styles.css'
+import "components/inputModal/styles.css";
+import { MODAL_TYPE } from "utils/enums";
 interface IFormButtonProps {
-  setVisible: Function;
+  handleClose: () => void;
+  mode: MODAL_TYPE;
 }
 
 const FormButtonGroup: React.FC<IFormButtonProps> = (props) => {
   return (
     <div className="input-form-btn-group">
-      <Button
-        className="btn-inputCancel"
-        onClick={() => props.setVisible(false)}
-      >
+      <Button className="btn-inputCancel" onClick={() => props.handleClose()}>
         Close
       </Button>
-      <Button
-        className="btn-inputSuccess"
-        type="submit"
-      >
-        Add
+      <Button className="btn-inputSuccess" type="submit">
+        {props?.mode}
       </Button>
     </div>
   );
