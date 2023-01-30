@@ -37,14 +37,14 @@
   cursor: pointer;
 }
 
-.mainHdg {
+.main-heading {
   font-size: 24px;
   color: black;
   margin: 20px;
   font-weight: bolder;
 }
 
-.subHdg {
+.sub-heading {
   font-size: 18px;
   color: #2e3136;
   margin: 10px;

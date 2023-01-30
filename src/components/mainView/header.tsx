@@ -7,15 +7,13 @@ interface IHeaderProps {
 const Header: React.FC<IHeaderProps> = (props) => {
   return (
     <>
-      <div className="mainHdg">Student Portal</div>
+      <div className="main-heading">Student Portal</div>
       <hr style={{ borderColor: "gray" }} />
       <Stack
         direction="horizontal"
         style={{ justifyContent: "space-between", margin: "20px" }}
       >
-        <div>
-          <div className="subHdg">Students Summary</div>
-        </div>
+        <div className="sub-heading">Students Summary</div>
         <div className="ml-auto">
           <button
             className="btn btn-border"

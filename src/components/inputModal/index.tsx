@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Modal, Form } from "react-bootstrap";
 import React, { useEffect, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
+import { Modal, Form } from "react-bootstrap";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormButtonGroup from "components/inputModal/FormAction";
 import { schema } from "utils/inputFormSchema";
@@ -18,7 +18,7 @@ interface IModalProps {
   addStudent: (payload: IStudentRaw) => ActionType<typeof addStudent>;
   updateStudent: (payload: IStudentRaw) => ActionType<typeof updateStudent>;
   studentData: IStudentRaw;
-  setStudentData: (std: IStudentRaw) => void;
+  setStudentData: (std: IStudentRaw | null) => void;
 }
 
 const StudentInputModal: React.FC<IModalProps> = (props) => {
@@ -72,13 +72,13 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
     } else {
       props.addStudent({ ...values, date: formattedDate, time: formattedTime });
     }
-    props.setStudentData(blankForm);
+    props.setStudentData(null);
     props.setVisible(false);
   };
 
   const handleClose = () => {
     props.setVisible(false);
-    props.setStudentData(blankForm);
+    props.setStudentData(null);
     reset(blankForm);
   };
 

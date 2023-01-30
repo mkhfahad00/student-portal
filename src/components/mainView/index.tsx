@@ -16,7 +16,7 @@ interface IProps extends IStudentState {
 
 const MainView: React.FC<IProps> = ({ fetchStudents, data }) => {
   const [show, setShow] = useState(false);
-  const [studentData, setStudentData] = useState<IStudentRaw>();
+  const [studentData, setStudentData] = useState<IStudentRaw | null>();
   const [dashboardData, setDashboardData] = useState<ISummaryData>();
   useEffect(() => {
     fetchStudents();
@@ -33,7 +33,7 @@ const MainView: React.FC<IProps> = ({ fetchStudents, data }) => {
     result.topGrade = sortedGrades[0];
     result.minGrade = sortedGrades[sortedGrades.length - 1];
 
-    //initialize hash-map
+    //initialize hash-map for keeping track of failed and passed subjects as <subject, count>
     const passed = new Map();
     const failed = new Map();
     subjects.forEach((x) => {
@@ -41,6 +41,7 @@ const MainView: React.FC<IProps> = ({ fetchStudents, data }) => {
       failed.set(x, 0);
     });
 
+    //traverse the student list, increment passed/failed based on grade
     data.forEach((std) => {
       if (std?.grade !== "F") {
         passed.set(std?.subject, passed.get(std?.subject) + 1);
@@ -48,8 +49,7 @@ const MainView: React.FC<IProps> = ({ fetchStudents, data }) => {
         failed.set(std?.subject, failed.get(std?.subject) + 1);
       }
     });
-
-    //convert to array and sort
+    //since we need maxPassed and maxFailed only, convert hash map to array and sort it to get max and min value
     const sortedPassed = Array.from(passed).sort((a, b) => b[1] - a[1]);
     const sortedFailed = Array.from(failed).sort((a, b) => b[1] - a[1]);
 

@@ -1,8 +1,11 @@
 import React from "react";
 import "components/dropdownMenu/styles.css";
+import { ActionType } from "typesafe-actions";
+import { deleteStudent } from "state/ducks/students/actions";
+import { DELETE_ICON, EDIT_ICON } from "utils";
 type SingleRecordProps = {
   handleEdit: () => void;
-  handleDelete: () => void;
+  handleDelete: () => ActionType<typeof deleteStudent>;
 };
 
 const DropdownMenu = ({ handleEdit, handleDelete }: SingleRecordProps) => {
@@ -21,19 +24,11 @@ const DropdownMenu = ({ handleEdit, handleDelete }: SingleRecordProps) => {
       <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
         <div>
           <div className="dropdown-item" onClick={() => handleEdit()}>
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/1828/1828911.png"
-              alt="Edit Student"
-              className="img-icon"
-            />
+            <img src={EDIT_ICON} alt="Edit Student" className="img-icon" />
             Edit
           </div>
           <div className="dropdown-item" onClick={() => handleDelete()}>
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
-              className="img-icon"
-              alt="Delete Student"
-            />
+            <img src={DELETE_ICON} className="img-icon" alt="Delete Student" />
             Delete
           </div>
         </div>

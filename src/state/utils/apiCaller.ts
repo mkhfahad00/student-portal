@@ -1,10 +1,9 @@
-const BASE_URL = "https://crudcrud.com/api/c13ed7a9d3a3483bbea1877988f18a77"; //can move to .env
 export default async function apiCaller<T>(
   method: string,
   path: string,
   data?: any
 ): Promise<T[] | null> {
-  return fetch(BASE_URL + path, {
+  return fetch(process.env.REACT_APP_BASE_URL + path, {
     method,
     headers: {
       Accept: "application/json",

@@ -8,7 +8,7 @@ interface IModalContainerProps {
   visible: boolean;
   setVisible: (x: boolean) => void;
   studentData: IStudentRaw;
-  setStudentData: (std: IStudentRaw) => void;
+  setStudentData: (std: IStudentRaw | null) => void;
 }
 
 const InputModalContainer = ({
