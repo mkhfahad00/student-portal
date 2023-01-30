@@ -1,25 +1,21 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
-import SingleRecord from "components/mainView/SingleRecord";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { IStudentRaw } from "state/ducks/students/types";
-import { useSelector } from "react-redux";
-import { IApplicationState } from "state/ducks";
+import SingleRecordContainer from "containers/singleRecordContainer";
 
 type IProps = {
   setStudentData: (std: IStudentRaw) => void;
   setShow: (x: boolean) => void;
-  handleDelete: (x: string) => void;
+  studentList: IStudentRaw[];
 };
 const StudentDetails = (props: IProps) => {
-  const studentList = useSelector(
-    (state: IApplicationState) => state?.students?.data
-  );
   const handleEdit = (student: IStudentRaw) => {
     props.setShow(true);
     props.setStudentData(student);
   };
+
   return (
     <Container>
       <>
@@ -32,12 +28,11 @@ const StudentDetails = (props: IProps) => {
           <Col> Action </Col>
         </Row>
         <hr style={{ borderColor: "gray" }} />
-        {studentList?.map((student: IStudentRaw, key) => (
-          <SingleRecord
+        {props?.studentList?.map((student: IStudentRaw, key) => (
+          <SingleRecordContainer
             student={student}
             key={key}
             handleEdit={() => handleEdit(student)}
-            handleDelete={() => props.handleDelete(student?._id)}
           />
         ))}
       </>

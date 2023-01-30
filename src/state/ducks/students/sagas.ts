@@ -6,9 +6,8 @@ import {
   takeEvery,
   takeLatest,
 } from "redux-saga/effects";
+import apiCaller from "state/utils/apiCaller";
 import { ActionType } from "typesafe-actions";
-// import { IMetaAction } from "..";
-import apiCaller from "../../utils/apiCaller";
 import {
   addStudent,
   addStudentError,
@@ -22,12 +21,9 @@ import {
   updateStudent,
   updateStudentError,
   updateStudentSuccess,
-} from "./actions";
-import { IStudentRaw, StudentActionTypes } from "./types";
+} from "state/ducks/students/actions";
+import { IStudentRaw, StudentActionTypes } from "state/ducks/students/types";
 
-/**
- * @desc Business logic of effect.
- */
 function* handleStudentFetch(
   action: ActionType<typeof fetchStudents>
 ): Generator {
@@ -51,16 +47,8 @@ function* handleStudentDelete(
   action: ActionType<typeof deleteStudent>
 ): Generator {
   try {
-    try {
-      //TODO RESOLVE API_CALLER ERRRORS
-      const res: IStudentRaw[] | any = yield call(
-        apiCaller,
-        action.meta.method,
-        action.meta.route
-      );
-    } catch (e) {
-      console.log(e);
-    }
+    yield call(apiCaller, action.meta.method, action.meta.route);
+
     yield put(deleteStudentSuccess(action.payload));
   } catch (err) {
     if (err instanceof Error) {
@@ -92,18 +80,10 @@ function* handleStudentUpdate(
   action: ActionType<typeof updateStudent>
 ): Generator {
   try {
-    try {
-      const payload = { ...action.payload };
-      delete payload._id;
-      const res: IStudentRaw | any = yield call(
-        apiCaller,
-        action.meta.method,
-        action.meta.route,
-        payload
-      );
-    } catch (e) {
-      console.log("failed try-catch 91 sagas.ts", e);
-    }
+    const payload = { ...action.payload };
+    delete payload._id;
+    yield call(apiCaller, action.meta.method, action.meta.route, payload);
+
     yield put(updateStudentSuccess(action.payload));
   } catch (err) {
     if (err instanceof Error) {

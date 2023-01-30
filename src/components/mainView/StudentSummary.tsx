@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Container, Stack } from "react-bootstrap";
+import { Row, Col, Container } from "react-bootstrap";
 import SummaryBox from "components/mainView/SummaryBox";
 import { ISummaryData } from "utils";
 

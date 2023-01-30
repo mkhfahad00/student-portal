@@ -2,13 +2,8 @@ import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MainView from "components/mainView";
 import { IApplicationState } from "state/ducks/index";
-import {
-  addStudent,
-  deleteStudent,
-  fetchStudents,
-  updateStudent,
-} from "state/ducks/students/actions";
-import { IStudentRaw, IStudentState } from "state/ducks/students/types";
+import { fetchStudents } from "state/ducks/students/actions";
+import { IStudentState } from "state/ducks/students/types";
 
 const MainViewContainer = () => {
   const dispatch = useDispatch();
@@ -23,18 +18,6 @@ const MainViewContainer = () => {
 
   const dispatchToProps = {
     fetchStudents: useCallback(() => dispatch(fetchStudents()), [dispatch]),
-    addStudent: useCallback(
-      (payload: IStudentRaw) => dispatch(addStudent(payload)),
-      [dispatch]
-    ),
-    updateStudent: useCallback(
-      (payload: IStudentRaw) => dispatch(updateStudent(payload)),
-      [dispatch]
-    ),
-    deleteStudent: useCallback(
-      (payload: string) => dispatch(deleteStudent(payload)),
-      [dispatch]
-    ),
   };
 
   return <MainView {...stateToProps} {...dispatchToProps} />;

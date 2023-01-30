@@ -1,5 +1,3 @@
-import StudentInputModal from "components/inputModal";
-import StudentDetails from "components/mainView/StudentDetails";
 import StudentSummary from "components/mainView/StudentSummary";
 import { useEffect, useState } from "react";
 import React from "react";
@@ -7,28 +5,16 @@ import "components/mainView/styles.css";
 import { IStudentRaw, IStudentState } from "state/ducks/students/types";
 import Header from "components/mainView/header";
 import { ActionType } from "typesafe-actions";
-import {
-  addStudent,
-  deleteStudent,
-  fetchStudents,
-  updateStudent,
-} from "state/ducks/students/actions";
+import { fetchStudents } from "state/ducks/students/actions";
 import { subjects, ISummaryData } from "utils";
+import InputModalContainer from "containers/inputModalContainer";
+import StudentDetailsContainer from "containers/studentDetailsContainer";
 interface IProps extends IStudentState {
   fetchStudents: () => ActionType<typeof fetchStudents>;
-  addStudent: (payload: IStudentRaw) => ActionType<typeof addStudent>;
-  updateStudent: (payload: IStudentRaw) => ActionType<typeof updateStudent>;
-  deleteStudent: (payload: string) => ActionType<typeof deleteStudent>;
   data: IStudentRaw[];
 }
 
-const MainView: React.FC<IProps> = ({
-  fetchStudents,
-  addStudent,
-  updateStudent,
-  deleteStudent,
-  data,
-}) => {
+const MainView: React.FC<IProps> = ({ fetchStudents, data }) => {
   const [show, setShow] = useState(false);
   const [studentData, setStudentData] = useState<IStudentRaw>();
   const [dashboardData, setDashboardData] = useState<ISummaryData>();
@@ -40,14 +26,8 @@ const MainView: React.FC<IProps> = ({
     summaryData();
   }, [data]);
 
-  const handleDelete = (id: string) => {
-    deleteStudent(id);
-    fetchStudents();
-  };
-
   const summaryData = () => {
     let result = {} as ISummaryData;
-    console.log("data", data);
     const sortedGrades = data.map((itx) => itx.grade).sort();
 
     result.topGrade = sortedGrades[0];
@@ -91,18 +71,15 @@ const MainView: React.FC<IProps> = ({
     <>
       <Header setShow={setShow} />
       <StudentSummary {...dashboardData} />
-      <StudentDetails
+      <StudentDetailsContainer
         setStudentData={setStudentData}
         setShow={setShow}
-        handleDelete={(id: string) => handleDelete(id)}
       />
-      <StudentInputModal
+      <InputModalContainer
         visible={show}
         setVisible={setShow}
-        studentData={studentData as IStudentRaw}
-        updateStudent={updateStudent}
-        addStudent={addStudent}
         setStudentData={setStudentData}
+        studentData={studentData as IStudentRaw}
       />
     </>
   );

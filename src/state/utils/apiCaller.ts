@@ -1,5 +1,5 @@
-const BASE_URL = "https://crudcrud.com/api/9a06185f6ecf4155bdd1b08e282110fd"; //can move to .env
-export default function apiCaller<T>(
+const BASE_URL = "https://crudcrud.com/api/c13ed7a9d3a3483bbea1877988f18a77"; //can move to .env
+export default async function apiCaller<T>(
   method: string,
   path: string,
   data?: any
@@ -11,7 +11,9 @@ export default function apiCaller<T>(
       "Content-Type": "application/json",
     },
     body: data ? JSON.stringify(data) : null,
-  }).then((res) => {
-    return res?.json(); //TODO FIX ERROR HERE
+  }).then(async (res) => {
+    //API restpoint sends an empty body on PUT and DELETE causing JSON parse error
+    if (method === "put" || method === "delete") return;
+    return res?.json();
   });
 }

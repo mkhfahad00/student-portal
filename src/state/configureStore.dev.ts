@@ -1,5 +1,5 @@
 import { applyMiddleware, createStore, Store } from "redux";
-import { IApplicationState, rootReducer, rootSaga } from "./ducks/index";
+import { IApplicationState, rootReducer, rootSaga } from "state/ducks/index";
 import sagaMiddleware from "state/middleware/saga";
 import { composeWithDevTools } from "redux-devtools-extension";
 

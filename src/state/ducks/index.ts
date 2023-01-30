@@ -1,15 +1,9 @@
 import { combineReducers } from "redux";
 import { all, fork } from "redux-saga/effects";
-import {
-  Action,
-  //   MetaAction,
-  PayloadAction,
-  TypeConstant,
-} from "typesafe-actions";
+import { Action, PayloadAction, TypeConstant } from "typesafe-actions";
 import { studentReducer } from "state/ducks/students/reducers";
 import studentSaga from "state/ducks/students/sagas";
 import { IStudentState } from "state/ducks/students/types";
-// The top-level state object
 export interface IApplicationState {
   students: IStudentState;
 }
