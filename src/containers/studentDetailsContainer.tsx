@@ -37,31 +37,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(StudentDetailsContainer);
-
-// const StudentDetailsContainer = ({
-//   setShow,
-//   setStudentData,
-// }: IContainerProps) => {
-//   const dispatch = useDispatch();
-//   const studentList = useSelector(
-//     (state: IApplicationState) => state?.students?.data
-//   );
-
-//   const dispatchToProps = {
-//     deleteStudent: useCallback(
-//       (payload: string) => dispatch(deleteStudent(payload)),
-//       [dispatch]
-//     ),
-//   };
-
-//   return (
-//     <StudentDetails
-//       setStudentData={setStudentData}
-//       studentList={studentList}
-//       setShow={setShow}
-//       {...dispatchToProps}
-//     />
-//   );
-// };
-
-// export default StudentDetailsContainer;

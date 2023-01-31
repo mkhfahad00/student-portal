@@ -42,23 +42,3 @@ IContainerProps) => (
 );
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainViewContainer);
-
-// const MainViewContainer = () => {
-//   const dispatch = useDispatch();
-
-//   const stateToProps: IStudentState = useSelector(
-//     ({ students }: IApplicationState) => ({
-//       loading: students.loading,
-//       errors: students.errors,
-//       data: students.data,
-//     })
-//   );
-
-//   const dispatchToProps = {
-//     fetchStudents: useCallback(() => dispatch(fetchStudents()), [dispatch]),
-//   };
-
-//   return <MainView {...stateToProps} {...dispatchToProps} />;
-// };
-
-// export default MainViewContainer;

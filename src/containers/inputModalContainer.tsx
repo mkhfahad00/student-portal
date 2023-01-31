@@ -39,35 +39,3 @@ const mapDispatchToProps = {
 };
 
 export default connect(null, mapDispatchToProps)(InputModalContainer);
-
-// const InputModalContainer = ({
-//   visible,
-//   setVisible,
-//   studentData,
-//   setStudentData,
-// }: IModalContainerProps) => {
-//   const dispatch = useDispatch();
-
-//   const dispatchToProps = {
-//     addStudent: useCallback(
-//       (payload: IStudentRaw) => dispatch(addStudent(payload)),
-//       [dispatch]
-//     ),
-//     updateStudent: useCallback(
-//       (payload: IStudentRaw) => dispatch(updateStudent(payload)),
-//       [dispatch]
-//     ),
-//   };
-
-//   return (
-//     <StudentInputModal
-//       visible={visible}
-//       setVisible={setVisible}
-//       studentData={studentData as IStudentRaw}
-//       setStudentData={setStudentData}
-//       {...dispatchToProps}
-//     />
-//   );
-// };
-
-// export default InputModalContainer;

@@ -28,24 +28,3 @@ const SingleRecordContainer = ({
 );
 
 export default connect(null, mapDispatchToProps)(SingleRecordContainer);
-
-// const SingleRecordContainer = ({ handleEdit, student }: IContainerProps) => {
-//   const dispatch = useDispatch();
-
-//   const dispatchToProps = {
-//     deleteStudent: useCallback(
-//       (payload: string) => dispatch(deleteStudent(payload)),
-//       [dispatch]
-//     ),
-//   };
-
-//   return (
-//     <SingleRecord
-//       student={student}
-//       handleEdit={() => handleEdit()}
-//       {...dispatchToProps}
-//     />
-//   );
-// };
-
-// export default SingleRecordContainer;
