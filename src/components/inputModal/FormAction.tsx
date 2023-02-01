@@ -1,22 +1,37 @@
 import React from "react";
-import { Button } from "react-bootstrap";
-import "components/inputModal/styles.css";
 import { MODAL_TYPE } from "utils/enums";
+import { useStyles } from "components/inputModal/styles";
+import { Box, Button } from "@mui/material";
+
 interface IFormButtonProps {
   handleClose: () => void;
   mode: MODAL_TYPE;
+  onSubmit: (e: any) => void;
 }
 
 const FormButtonGroup: React.FC<IFormButtonProps> = (props) => {
+  // const classes = useStyles();
+
   return (
-    <div className="input-form-btn-group">
-      <Button className="btn-inputCancel" onClick={() => props.handleClose()}>
+    <Box
+    // className={classes.inputFormBtnGroup}
+    >
+      <Button
+        variant="outlined"
+        // className={classes.inputFormBtnGroup}
+        onClick={() => props.handleClose()}
+      >
         Close
       </Button>
-      <Button className="btn-inputSuccess" type="submit">
+      <Button
+        variant="contained"
+        // className={classes.inputFormBtnGroup}
+        // type="submit"
+        onClick={props.onSubmit}
+      >
         {props?.mode}
       </Button>
-    </div>
+    </Box>
   );
 };
 

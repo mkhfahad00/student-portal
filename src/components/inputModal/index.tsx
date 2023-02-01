@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Modal, Form } from "react-bootstrap";
+// import { Modal, Form } from "react-bootstrap";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormButtonGroup from "components/inputModal/FormAction";
 import { schema } from "utils/inputFormSchema";
@@ -12,6 +12,19 @@ import { grades, subjects } from "utils/index";
 import { IStudentRaw } from "state/ducks/students/types";
 import { ActionType } from "typesafe-actions";
 import { addStudent, updateStudent } from "state/ducks/students/actions";
+import {
+  Typography,
+  Modal,
+  Box,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  TextField,
+  Button,
+} from "@mui/material";
+
 interface IModalProps {
   visible: boolean;
   setVisible: (x: boolean) => void;
@@ -36,20 +49,20 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
     reset,
     control,
     formState: { errors },
+    getValues,
   } = useForm<IStudentRaw>({
-    mode: "onTouched",
-    reValidateMode: "onChange",
+    mode: "all",
+    // reValidateMode: "onChange",
     resolver: yupResolver(schema),
-    defaultValues: useMemo(() => {
-      return props.studentData || blankForm;
-    }, [props.studentData]),
+    defaultValues: props.studentData || blankForm,
   });
 
   useEffect(() => {
     reset(props.studentData);
   }, [props.studentData]);
 
-  const onSubmit = (values: IStudentRaw) => {
+  const onFormSubmit = (values: IStudentRaw) => {
+    console.log("🚀 ~ file: index.tsx:66 ~ onSubmit ~ values", values);
     reset(blankForm);
     const date = new Date();
     const formattedDate = date.toLocaleDateString("en-GB", {
@@ -84,18 +97,12 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
 
   return (
     <>
-      <Modal
-        show={props.visible}
-        onHide={() => {
-          handleClose();
-        }}
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>{modalType} Student Data</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleSubmit(onSubmit)}>
+      <Dialog open={props.visible} onClose={handleClose} fullWidth>
+        <DialogTitle>{modalType} Student Data</DialogTitle>
+        <DialogContent>
+          <form
+          //  onSubmit={handleSubmit(onSubmit)}
+          >
             <Controller
               control={control}
               name="name"
@@ -113,15 +120,23 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
             <Controller
               control={control}
               name="marks"
-              render={({ field }) => (
-                <InputTextField
-                  {...field}
-                  fieldLabel="Marks"
-                  errors={errors}
-                  placeholder="Enter marks obtained"
-                  type="number"
-                />
-              )}
+              render={({ field }) => {
+                // debugger;
+                return (
+                  <InputTextField
+                    {...field}
+                    fieldLabel="Marks"
+                    errors={errors}
+                    placeholder="Enter marks obtained"
+                    type="number"
+                    value={field.value.toString()}
+                    // onChange={(event) => {
+                    //   debugger;
+                    //   field.onChange(parseInt(event.target.value));
+                    // }}
+                  />
+                );
+              }}
             />
 
             <Controller
@@ -149,12 +164,97 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
                 />
               )}
             />
-            <FormButtonGroup mode={modalType} handleClose={handleClose} />
-          </Form>
-        </Modal.Body>
-      </Modal>
+          </form>
+        </DialogContent>
+        <DialogActions>
+          <FormButtonGroup
+            mode={modalType}
+            handleClose={handleClose}
+            onSubmit={(e: any) => {
+              // console.log("je");
+              console.log(getValues());
+              console.log(errors);
+              // debugger;
+              handleSubmit(onFormSubmit)(e);
+              // onSubmit(getValues());
+            }}
+          />
+        </DialogActions>
+      </Dialog>{" "}
     </>
   );
 };
 
 export default StudentInputModal;
+
+{
+  /* <Modal
+show={props.visible}
+onHide={() => {
+  handleClose();
+}}
+keyboard={false}
+>
+<Modal.Header closeButton>
+  <Modal.Title>{modalType} Student Data</Modal.Title>
+</Modal.Header>
+<Modal.Body>
+  <Form onSubmit={handleSubmit(onSubmit)}>
+    <Controller
+      control={control}
+      name="name"
+      render={({ field }) => (
+        <InputTextField
+          {...field}
+          fieldLabel="Name"
+          errors={errors}
+          placeholder="Enter name"
+          type="text"
+        />
+      )}
+    />
+
+    <Controller
+      control={control}
+      name="marks"
+      render={({ field }) => (
+        <InputTextField
+          {...field}
+          fieldLabel="Marks"
+          errors={errors}
+          placeholder="Enter marks obtained"
+          type="number"
+        />
+      )}
+    />
+
+    <Controller
+      control={control}
+      name="subject"
+      render={({ field }) => (
+        <InputSelectField
+          {...field}
+          fieldLabel="Subject"
+          errors={errors}
+          data={subjects}
+        />
+      )}
+    />
+
+    <Controller
+      control={control}
+      name="grade"
+      render={({ field }) => (
+        <InputSelectField
+          {...field}
+          fieldLabel="Grade"
+          errors={errors}
+          data={grades}
+        />
+      )}
+    />
+    <FormButtonGroup mode={modalType} handleClose={handleClose} />
+  </Form>
+</Modal.Body>
+</Modal> */
+}
