@@ -21,12 +21,6 @@ const SummaryBox: React.FC<ISummaryBoxProps> = (props) => {
           {props?.subText}
         </Typography>
       </Box>
-      {/* <div>
-        <div className="summaryBoxInner" style={{ background: props?.color }}>
-          <span className="summaryBoxText">{props?.text}</span>
-          <span className="summaryBoxSubtext">{props?.subText}</span>
-        </div>
-      </div> */}
     </>
   );
 };

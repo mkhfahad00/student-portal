@@ -19,7 +19,6 @@ const SingleRecord = ({
 }: SingleRecordProps) => {
   const classes = useStyles();
 
-  // const grade: "gradeA" | "gradeB" = "gradeA";
   let gradeClass;
   switch (student.grade) {
     case "A":
@@ -48,8 +47,8 @@ const SingleRecord = ({
         direction="row"
         justifyContent="center"
         alignItems="space-evenly"
-        // sx={{ margin: "20px" }}
         className={classes.text}
+        sx={{ alignItems: "center" }}
       >
         <Grid item xs={2} md={2}>
           <Typography> {student?.name}</Typography>
@@ -75,28 +74,6 @@ const SingleRecord = ({
           />{" "}
         </Grid>
       </Grid>
-      {/* <Divider /> */}
-      {/* <Row style={{ marginTop: "20px" }}>
-        <Col> {student?.name} </Col>
-        <Col> {student?.marks} </Col>
-        <Col> {student?.subject} </Col>
-        <Col>
-          <div className={`gradeBox grade${student.grade}`}>
-            {student?.grade}
-          </div>
-        </Col>
-        <Col>
-          <div> {student?.date} </div>
-          <div className="timeStamp"> at {student?.time}</div>
-        </Col>
-        <Col>
-          <DropdownMenu
-            handleEdit={handleEdit}
-            handleDelete={() => deleteStudent(student?._id)}
-          />
-        </Col>
-      </Row>
-      <hr style={{ borderColor: "gray" }} /> */}
     </>
   );
 };

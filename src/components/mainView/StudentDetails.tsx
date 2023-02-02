@@ -57,6 +57,7 @@ const StudentDetails = (props: IProps) => {
         direction="column"
         justifyContent="space-evenly"
         alignItems="center"
+        sx={{ paddingLeft: "20px" }}
         // spacing={2}
         divider={<Divider sx={{ borderColor: "gray" }} flexItem />}
       >
@@ -68,27 +69,7 @@ const StudentDetails = (props: IProps) => {
           />
         ))}
       </Stack>
-
-      {/* // <Container>
-    //   <>
-    //     <Row style={{ marginTop: "20px" }} className="text">
-    //       <Col> Name </Col>
-    //       <Col> Marks </Col>
-    //       <Col> Subject </Col>
-    //       <Col> Grade </Col>
-    //       <Col> Date </Col>
-    //       <Col> Action </Col>
-    //     </Row>
-    //     <hr style={{ borderColor: "gray" }} />
-    //     {props?.studentList?.map((student: IStudentRaw, key) => ( */}
-      {/* //       <SingleRecordContainer */}
-      {/* //         student={student}
-    //         key={key}
-    //         handleEdit={() => handleEdit(student)}
-    //       />
-    //     ))} */}
     </>
-    // </Container>
   );
 };
 

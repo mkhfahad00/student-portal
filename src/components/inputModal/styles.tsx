@@ -3,17 +3,18 @@ export const useStyles = makeStyles((theme) => ({
   inputFormBtnGroup: {
     display: "flex",
     justifyContent: "space-between",
-    paddingTop: "15px",
+    marginBottom: "20px",
   },
   btnInputSuccess: {
-    backgroundColor: "#4aaa9a !important",
-    paddingLeft: "60px !important",
-    paddingRight: "60px !important",
+    backgroundColor: "#4aaa9a",
+    paddingLeft: "60px",
+    paddingRight: "60px",
   },
   btnInputCancel: {
-    backgroundColor: "white !important",
-    paddingLeft: "60px !important",
-    paddingRight: "60px !important",
-    color: "black !important",
+    backgroundColor: "white",
+    paddingLeft: "60px",
+    paddingRight: "60px",
+    borderColor: "#4aaa9a",
+    color: "black",
   },
 }));

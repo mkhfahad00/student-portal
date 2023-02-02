@@ -49,10 +49,9 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
     reset,
     control,
     formState: { errors },
-    getValues,
   } = useForm<IStudentRaw>({
     mode: "all",
-    // reValidateMode: "onChange",
+    reValidateMode: "onChange",
     resolver: yupResolver(schema),
     defaultValues: props.studentData || blankForm,
   });
@@ -62,7 +61,6 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
   }, [props.studentData]);
 
   const onFormSubmit = (values: IStudentRaw) => {
-    console.log("🚀 ~ file: index.tsx:66 ~ onSubmit ~ values", values);
     reset(blankForm);
     const date = new Date();
     const formattedDate = date.toLocaleDateString("en-GB", {
@@ -100,9 +98,7 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
       <Dialog open={props.visible} onClose={handleClose} fullWidth>
         <DialogTitle>{modalType} Student Data</DialogTitle>
         <DialogContent>
-          <form
-          //  onSubmit={handleSubmit(onSubmit)}
-          >
+          <form>
             <Controller
               control={control}
               name="name"
@@ -111,29 +107,21 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
                   {...field}
                   fieldLabel="Name"
                   errors={errors}
-                  placeholder="Enter name"
                   type="text"
                 />
               )}
             />
-
             <Controller
               control={control}
               name="marks"
               render={({ field }) => {
-                // debugger;
                 return (
                   <InputTextField
                     {...field}
                     fieldLabel="Marks"
                     errors={errors}
-                    placeholder="Enter marks obtained"
                     type="number"
                     value={field.value.toString()}
-                    // onChange={(event) => {
-                    //   debugger;
-                    //   field.onChange(parseInt(event.target.value));
-                    // }}
                   />
                 );
               }}
@@ -166,95 +154,16 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
             />
           </form>
         </DialogContent>
-        <DialogActions>
-          <FormButtonGroup
-            mode={modalType}
-            handleClose={handleClose}
-            onSubmit={(e: any) => {
-              // console.log("je");
-              console.log(getValues());
-              console.log(errors);
-              // debugger;
-              handleSubmit(onFormSubmit)(e);
-              // onSubmit(getValues());
-            }}
-          />
-        </DialogActions>
-      </Dialog>{" "}
+        <FormButtonGroup
+          mode={modalType}
+          handleClose={handleClose}
+          onSubmit={(e: any) => {
+            handleSubmit(onFormSubmit)(e);
+          }}
+        />
+      </Dialog>
     </>
   );
 };
 
 export default StudentInputModal;
-
-{
-  /* <Modal
-show={props.visible}
-onHide={() => {
-  handleClose();
-}}
-keyboard={false}
->
-<Modal.Header closeButton>
-  <Modal.Title>{modalType} Student Data</Modal.Title>
-</Modal.Header>
-<Modal.Body>
-  <Form onSubmit={handleSubmit(onSubmit)}>
-    <Controller
-      control={control}
-      name="name"
-      render={({ field }) => (
-        <InputTextField
-          {...field}
-          fieldLabel="Name"
-          errors={errors}
-          placeholder="Enter name"
-          type="text"
-        />
-      )}
-    />
-
-    <Controller
-      control={control}
-      name="marks"
-      render={({ field }) => (
-        <InputTextField
-          {...field}
-          fieldLabel="Marks"
-          errors={errors}
-          placeholder="Enter marks obtained"
-          type="number"
-        />
-      )}
-    />
-
-    <Controller
-      control={control}
-      name="subject"
-      render={({ field }) => (
-        <InputSelectField
-          {...field}
-          fieldLabel="Subject"
-          errors={errors}
-          data={subjects}
-        />
-      )}
-    />
-
-    <Controller
-      control={control}
-      name="grade"
-      render={({ field }) => (
-        <InputSelectField
-          {...field}
-          fieldLabel="Grade"
-          errors={errors}
-          data={grades}
-        />
-      )}
-    />
-    <FormButtonGroup mode={modalType} handleClose={handleClose} />
-  </Form>
-</Modal.Body>
-</Modal> */
-}

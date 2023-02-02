@@ -6,6 +6,8 @@ import {
   TextField,
   MenuItem,
 } from "@mui/material";
+import { Controller } from "react-hook-form";
+import { IStudentRaw } from "state/ducks/students/types";
 
 interface ITextField {
   errors: any;
@@ -13,15 +15,13 @@ interface ITextField {
   name: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string | number;
-  placeholder: string;
+  // placeholder: string;
   type: string;
+  // control: any;
 }
 const InputTextField: React.FC<ITextField> = (props) => {
   return (
-    <FormGroup
-      className="mb-3"
-      // controlId={props.name}
-    >
+    <FormGroup className="mb-3">
       <FormLabel>{props.fieldLabel}</FormLabel>
       <TextField
         style={{ marginTop: 20 }}
@@ -31,35 +31,13 @@ const InputTextField: React.FC<ITextField> = (props) => {
         id={props.fieldLabel}
         value={props.value}
         margin="dense"
-        // helperText={`Please Enter ${props.fieldLabel}`}
-        helperText={props.placeholder}
+        error={props?.errors[props?.name]}
+        helperText={props?.errors[props?.name]?.message?.toString()}
         type={props.type}
         onChange={props.onChange}
       ></TextField>
-      {/* {props.errors[props.name] && (
-      <FormControlLabel className="text-danger">
-        {props.errors[props.name].message?.toString()}
-      </FormControlLabel>
-    )} */}
     </FormGroup>
   );
 };
 
 export default InputTextField;
-
-{
-  /* <Form.Group className="mb-3" controlId={props.name}>
-<Form.Label>{props.fieldLabel}</Form.Label>
-<Form.Control
-  type={props.type}
-  placeholder={props.placeholder}
-  onChange={props.onChange}
-  value={props.value}
-/>
-{props.errors[props.name] && (
-  <Form.Text className="text-danger">
-    {props.errors[props.name].message?.toString()}
-  </Form.Text>
-)}
-</Form.Group> */
-}

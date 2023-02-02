@@ -12,10 +12,7 @@ interface ISelectField {
 }
 const InputSelectField: React.FC<ISelectField> = (props) => {
   return (
-    <FormGroup
-      className="mb-3"
-      // control={props.name}
-    >
+    <FormGroup className="mb-3">
       <FormLabel>{props.fieldLabel}</FormLabel>
       <TextField
         style={{ marginTop: 20 }}
@@ -26,8 +23,8 @@ const InputSelectField: React.FC<ISelectField> = (props) => {
         value={props?.value}
         id={props.fieldLabel}
         margin="dense"
-        helperText={`Please select ${props.fieldLabel}`}
-        // error={props.errors[props.name]}
+        error={props?.errors[props?.name]}
+        helperText={props?.errors[props?.name]?.message?.toString()}
         onChange={props.onChange}
       >
         {props?.data?.map((sub, key) => {
@@ -38,38 +35,8 @@ const InputSelectField: React.FC<ISelectField> = (props) => {
           );
         })}
       </TextField>
-      {/* {props.errors[props.name] && (
-        <FormControlLabel className="text-danger">
-          {props.errors[props.name].message?.toString()}
-        </FormControlLabel>
-      )} */}
     </FormGroup>
   );
 };
 
 export default InputSelectField;
-
-{
-  /* <Form.Group className="mb-3" controlId={props.name}>
-<Form.Label>{props.fieldLabel}</Form.Label>
-<Form.Select
-  aria-label={`Select ${props.fieldLabel}`}
-  onChange={props.onChange}
-  value={props.value}
->
-  <option>{`Choose ${props.fieldLabel}`}</option>
-  {props?.data?.map((sub, key) => {
-    return (
-      <option key={key} value={sub}>
-        {sub}
-      </option>
-    );
-  })}
-</Form.Select>
-{props.errors[props.name] && (
-  <Form.Text className="text-danger">
-    {props.errors[props.name].message?.toString()}
-  </Form.Text>
-)}
-</Form.Group> */
-}
