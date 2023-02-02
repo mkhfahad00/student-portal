@@ -1,26 +1,19 @@
-import React, { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { connect } from "react-redux";
 import MainView from "components/mainView";
 import { IApplicationState } from "state/ducks/index";
 import { fetchStudents } from "state/ducks/students/actions";
-import { IStudentState } from "state/ducks/students/types";
+import { getSummaryData } from "state/ducks/students/reselectors";
 
-const MainViewContainer = () => {
-  const dispatch = useDispatch();
+const mapStateToProps = (state: IApplicationState) => ({
+  loading: state.students.loading,
+  errors: state.students.errors,
+  data: state.students.data,
+  dashboardData: getSummaryData(state),
+});
 
-  const stateToProps: IStudentState = useSelector(
-    ({ students }: IApplicationState) => ({
-      loading: students.loading,
-      errors: students.errors,
-      data: students.data,
-    })
-  );
-
-  const dispatchToProps = {
-    fetchStudents: useCallback(() => dispatch(fetchStudents()), [dispatch]),
-  };
-
-  return <MainView {...stateToProps} {...dispatchToProps} />;
+const mapDispatchToProps = {
+  fetchStudents,
 };
 
-export default MainViewContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(MainView);
