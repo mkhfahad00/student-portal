@@ -23,18 +23,21 @@ import {
   updateStudentSuccess,
 } from "state/ducks/students/actions";
 import { IStudentRaw, StudentActionTypes } from "state/ducks/students/types";
+import { API } from "aws-amplify";
+
+import { listStudents } from "graphql/queries";
+import {
+  createStudent as createStudentMutation,
+  updateStudent as updateStudentMutation,
+  deleteStudent as deleteStudentMutation,
+} from "graphql/mutations";
 
 function* handleStudentFetch(
   action: ActionType<typeof fetchStudents>
 ): Generator {
   try {
-    const res: IStudentRaw[] | any = yield call(
-      apiCaller,
-      action.meta.method,
-      action.meta.route
-    );
-
-    yield put(fetchStudentsSuccess(res));
+    const res: IStudentRaw[] | any = yield API.graphql({ query: listStudents });
+    yield put(fetchStudentsSuccess(res.data.listStudents.items));
   } catch (err) {
     if (err instanceof Error) {
       yield put(fetchStudentsError(err.stack!));
@@ -47,8 +50,10 @@ function* handleStudentDelete(
   action: ActionType<typeof deleteStudent>
 ): Generator {
   try {
-    yield call(apiCaller, action.meta.method, action.meta.route);
-
+    yield API.graphql({
+      query: deleteStudentMutation,
+      variables: { input: { id: action.meta.id } },
+    });
     yield put(deleteStudentSuccess(action.payload));
   } catch (err) {
     if (err instanceof Error) {
@@ -60,14 +65,12 @@ function* handleStudentDelete(
 }
 function* handleStudentAdd(action: ActionType<typeof addStudent>): Generator {
   try {
-    const res: IStudentRaw | any = yield call(
-      apiCaller,
-      action.meta.method,
-      action.meta.route,
-      action.payload
-    );
+    const res: IStudentRaw | any = yield API.graphql({
+      query: createStudentMutation,
+      variables: { input: action.payload },
+    });
 
-    yield put(addStudentSuccess(res));
+    yield put(addStudentSuccess(res.data.createStudent));
   } catch (err) {
     if (err instanceof Error) {
       yield put(addStudentError(err.stack!));
@@ -81,8 +84,11 @@ function* handleStudentUpdate(
 ): Generator {
   try {
     const payload = { ...action.payload };
-    delete payload._id;
-    yield call(apiCaller, action.meta.method, action.meta.route, payload);
+    delete payload.id;
+    yield yield API.graphql({
+      query: updateStudentMutation,
+      variables: { input: { id: action.meta.id } },
+    });
 
     yield put(updateStudentSuccess(action.payload));
   } catch (err) {

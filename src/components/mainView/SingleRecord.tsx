@@ -35,7 +35,7 @@ const SingleRecord = ({
         <Col>
           <DropdownMenu
             handleEdit={handleEdit}
-            handleDelete={() => deleteStudent(student?._id)}
+            handleDelete={() => deleteStudent(student?.id)}
           />
         </Col>
       </Row>
