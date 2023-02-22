@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amplifyc3f80a4af7cc4-staging-74121-authRole",
+      "UnauthRoleArn": "arn:aws:iam::097552539367:role/amplify-amplifyc3f80a4af7cc4-staging-74121-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::097552539367:role/amplify-amplifyc3f80a4af7cc4-staging-74121-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-amplifyc3f80a4af7cc4-staging-74121-deployment",
+      "UnauthRoleName": "amplify-amplifyc3f80a4af7cc4-staging-74121-unauthRole",
+      "StackName": "amplify-amplifyc3f80a4af7cc4-staging-74121",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:097552539367:stack/amplify-amplifyc3f80a4af7cc4-staging-74121/4d32b770-b284-11ed-9ecc-0ae4c7e34705",
+      "AmplifyAppId": "d302qivgor3b7n"
+    },
+    "categories": {
+      "auth": {
+        "studentportal0068128f": {}
+      }
+    }
+  }
+}
