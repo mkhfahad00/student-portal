@@ -5,7 +5,7 @@ export interface IStudentState {
 }
 export type ApiResponse = Record<string, any>;
 export interface IStudentRaw extends ApiResponse {
-  // _id: string | null;
+  // id: string | null;
   name: string;
   subject: string;
   marks: number;

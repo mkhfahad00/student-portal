@@ -53,7 +53,7 @@ export const studentReducer = (
       const temp = [...state.data];
       const std = action.payload as IStudentRaw;
       temp.splice(
-        temp.findIndex((itx) => itx._id === std._id),
+        temp.findIndex((itx) => itx.id === std.id),
         1,
         action.payload as IStudentRaw
       );
@@ -76,7 +76,7 @@ export const studentReducer = (
     case StudentActionTypes.DELETE_STUDENT_SUCCESS: {
       return {
         ...state,
-        data: state.data.filter((itx) => itx._id !== action.payload),
+        data: state.data.filter((itx) => itx.id !== action.payload),
         loading: false,
       };
     }

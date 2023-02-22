@@ -26,7 +26,8 @@ export const addStudentError = (message: string) =>
 export const updateStudent = (data: IStudentRaw) => {
   return action(StudentActionTypes.UPDATE_STUDENT, data, {
     method: "put",
-    route: `/students/${data?._id}`,
+    route: `/students/${data?.id}`,
+    id: data?.id,
   });
 };
 export const updateStudentSuccess = (data: IStudentRaw) =>
@@ -38,6 +39,7 @@ export const deleteStudent = (id: string) =>
   action(StudentActionTypes.DELETE_STUDENT, id, {
     method: "delete",
     route: `/students/${id}`,
+    id: id,
   });
 export const deleteStudentSuccess = (id: string) =>
   action(StudentActionTypes.DELETE_STUDENT_SUCCESS, id);

@@ -29,7 +29,7 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
     grade: "",
   };
 
-  const modalType = props?.studentData?._id ? MODAL_TYPE.EDIT : MODAL_TYPE.ADD;
+  const modalType = props?.studentData?.id ? MODAL_TYPE.EDIT : MODAL_TYPE.ADD;
 
   const {
     handleSubmit,
@@ -65,7 +65,7 @@ const StudentInputModal: React.FC<IModalProps> = (props) => {
     if (modalType === MODAL_TYPE.EDIT) {
       props.updateStudent({
         ...values,
-        _id: props?.studentData._id,
+        id: props?.studentData.id,
         date: formattedDate,
         time: formattedTime,
       });
